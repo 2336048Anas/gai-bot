@@ -5,11 +5,34 @@ from datetime import datetime
 import asyncio
 import os
 
+# Debug environment variables
+print("=== Environment Variables Debug ===")
+print(f"API_ID: {os.getenv('API_ID', 'NOT FOUND')}")
+print(f"API_HASH: {os.getenv('API_HASH', 'NOT FOUND')}")
+print(f"GROUP_ID: {os.getenv('GROUP_ID', 'NOT FOUND')}")
+print(f"DISCORD_WEBHOOK: {os.getenv('DISCORD_WEBHOOK', 'NOT FOUND')}")
+print("================================")
+
 # Get credentials from environment variables (for security)
 api_id = os.getenv('API_ID')
 api_hash = os.getenv('API_HASH')
+
+# Convert api_id to int if it exists
+if api_id:
+    api_id = int(api_id)
+
+# Ensure we have the required values
+if not api_id or not api_hash:
+    print("ERROR: Missing API_ID or API_HASH environment variables!")
+    print("Please check your Railway environment variables.")
+    exit(1)
+
 group_ids = [int(os.getenv('GROUP_ID', '-1001950072056'))]
 discord_webhook_url = os.getenv('DISCORD_WEBHOOK')
+
+print(f"Using API_ID: {api_id}")
+print(f"Using GROUP_ID: {group_ids[0]}")
+print(f"Discord webhook configured: {'Yes' if discord_webhook_url else 'No'}")
 
 # Initialize the client
 client = TelegramClient('session', api_id, api_hash)
