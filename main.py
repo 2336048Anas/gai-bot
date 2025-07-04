@@ -35,7 +35,7 @@ print(f"Using GROUP_ID: {group_ids[0]}")
 print(f"Discord webhook configured: {'Yes' if discord_webhook_url else 'No'}")
 
 # Initialize the client
-client = TelegramClient('session', api_id, api_hash)
+client = TelegramClient('anon', api_id, api_hash)
 
 def send_to_discord(message):
     """Send message to Discord using webhook"""
